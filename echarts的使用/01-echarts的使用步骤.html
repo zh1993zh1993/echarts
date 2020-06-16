@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            /* background-color: pink; */
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script src="../js/echarts.min.js"></script>
+    <script>
+        //初始化实例对象 echarts.init(dom容器);
+      const myChart = echarts.init(document.querySelector('.box'))
+    //   指定配置项和数据
+    const option = {
+        color:['pink','red','green','skyblue'],//color设置线条的颜色，后面跟的是数组
+        title: { //设置图标的标题
+        text: '折线图堆叠'
+    },
+    tooltip: { // 图标的提示框组件
+        trigger: 'axis' // 触发方式，axis:坐标轴
+    },
+    legend: { // 图例组件 
+        // 如果series里面有name值则legend里面的data值可以删掉
+        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+    },
+    grid: { // 网格配置 grid可以控制线形图，柱状图等图表大小
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true // 是否显示刻度标签，true是显示
+    },
+    toolbox: { //工具箱组件 可以另存为图片等功能
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: { //  设置X轴的相关配置
+        type: 'category',// 类目轴
+        boundaryGap: false,// 是否让线条和坐标轴有缝隙
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    yAxis: {
+        type: 'value' //Y轴是数值
+    },
+    series: [ // 系列图表配置，他决定显示哪种类型的图表
+        {
+            name: '邮件营销',
+            type: 'line',
+            // stack: '总量',// 会叠加值，后一个系列的值会在前一个系列的值上相加，一般不需要 删掉就可
+            data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            name: '联盟广告',
+            type: 'line',
+            // stack: '总量',
+            data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+            name: '视频广告',
+            type: 'line',
+            // stack: '总量',
+            data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+            name: '直接访问',
+            type: 'line',
+            // stack: '总量',
+            data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+            name: '搜索引擎',
+            type: 'line',
+            // stack: '总量',
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }
+    ]
+        };
+        // 把配置项给实例对象
+        myChart.setOption(option)
+    </script>
+</body>
+</html>
